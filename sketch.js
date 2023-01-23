@@ -9,7 +9,7 @@ let paletteHash = fxrand()
 let moireHash = fxrand()
 let moireHash2 = fxrand()
 let moireHash3 = fxrand()
-let sz = rnd_int(5,15)
+let sz = rnd_int(7,16)
 let col
 let r,g,b
 let cl=[];
@@ -17,10 +17,14 @@ let pal;
 let typeHash = fxrand()
 let type
 
-if (typeHash > 0.75) type = "Square"
-else if (typeHash > 0.5) type = "Circle"
-else if (typeHash > 0.25) type = "Vertical Strips"
-else type = "Horizontal Strips"
+if (typeHash > .9) type = "Square"
+else if (typeHash > .8) type = "Circle"
+else if (typeHash > .6) type = "Vertical Strips"
+else if (typeHash > .5) type = "Horizontal Strips"
+else if (typeHash > .4) type = "Horizontal Lines"
+else if (typeHash > .3) type = "Vertical Lines"
+else if (typeHash > .2) type = "Grid"
+else type = "Four Circles"
 
 if (colHash > 0.8) cl[0]=[227,232,234], cl[1]=[192,192,192], cl[2]=[155,168,174], cl[3]=[112,122,126], cl[4]=[73,80,84], pal="Monochrome"
 else if (colHash > 0.6) cl[0]=[155,136,22], cl[1]=[249,137,72], cl[2]=[93,58,0], cl[3]=[104,78,50], cl[4]=[249,234,154], pal="Seventies"
@@ -67,6 +71,10 @@ function draw() {
   else if (type == "Circle") ellipse(w/6,w/6,w/1.5,w/1.5)
   else if (type == "Horizontal Strips") doubleRectH()
   else if (type == "Vertical Strips") doubleRectV()
+  else if (type == "Four Circles") fourSphere()
+  else if (type == "Horizontal Lines") hlines()
+  else if (type == "Vertical Lines") vlines()
+  else if (type == "Grid") vhlines()
   makeMoire2()
   makeMoire3()
 }
@@ -126,6 +134,30 @@ function doubleRectH() {
   rect(m*18,m*55,m*64,m*25)
 }
 
+function fourSphere() {
+ ellipse(m*20,m*20,m*25,m*25);
+ ellipse(m*55,m*20,m*25,m*25);
+ ellipse(m*20,m*60,m*25,m*25);
+ ellipse(m*55,m*60,m*25,m*25);
+}
+
+function hlines() {
+  for (let i = 0; i<=10; i++){
+    rect(m*20,m*(10*i)+m*2,w-m*40, 100);
+  }
+ }
+ function vlines() {
+  for (let i = 0; i<=10; i++){
+  
+    rect(m*(10*i)+m*2,m*20,100,w-m*40);
+  }
+ }
+ function vhlines() {
+  for (let i = 0; i<=10; i++){
+    rect(0,m*(10*i)+m*2,w, 100);
+    rect(m*(10*i)+m*2,0,100,w);
+  }
+ }
 function rnd_int(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
