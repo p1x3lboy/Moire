@@ -9,7 +9,7 @@ let paletteHash = fxrand()
 let moireHash = fxrand()
 let moireHash2 = fxrand()
 let moireHash3 = fxrand()
-let sz = rnd_int(7,16)
+let sz = rnd_int(6,14)
 let col
 let r,g,b
 let cl=[];
